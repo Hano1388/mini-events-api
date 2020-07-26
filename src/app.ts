@@ -33,7 +33,7 @@ app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/session', sessionRouter);
 
 
-// Catch 404 and forward to error handler
+// Catch 404 and forward to I handler
 app.use((req: Request, res: Response, next: NextFunction) => {
     const err: Error = new Error('Not Found')
     err.status = 404;

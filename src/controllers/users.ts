@@ -3,7 +3,6 @@ import Auth from '../utils/auth';
 import knex from '../db/client';
 import { UserId } from './types';
 import { geocoder } from '../utils/geocoder';
-import { Error } from '../types';
 import { generateError } from '../utils/generateError/index';
 
 export = {

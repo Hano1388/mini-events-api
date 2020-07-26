@@ -10,6 +10,7 @@ export async function up(knex: Knex): Promise<void> {
         t.string('address');
         t.float('latitude');
         t.float('longitude');
+        t.binary('avatar');
         t.boolean('is_admin').defaultTo(false);
         t.timestamp('created_at').defaultTo(knex.fn.now());
     })

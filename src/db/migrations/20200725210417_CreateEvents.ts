@@ -7,6 +7,9 @@ export async function up(knex: Knex): Promise<void> {
         t.string('title');
         t.text('description');
         t.dateTime('date');
+        t.string('address');
+        t.float('latitude');
+        t.float('longitude');
         t.bigInteger('user_id').references('users.id');
         t.timestamps(true, true);
     })
