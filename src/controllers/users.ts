@@ -40,7 +40,7 @@ export = {
                 next(new Error(error));
             }
         }
-        
+
         next(generateError('Email in use', 400));
     },
 }

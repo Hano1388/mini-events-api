@@ -15,3 +15,5 @@
     npm run db:migrate
     npm run db:seed
 ```
+
+`Note: Make sure to rename APP_KEYS_SAMPLE.ts module to APP_KEYS.ts and add your env variables there`

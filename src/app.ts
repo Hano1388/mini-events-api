@@ -5,6 +5,7 @@ import cors from 'cors';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 
+import { COOKIE_SECRET } from '../APP_KEYS';
 import { Error } from './types';
 import usersRouter from './routes/users';
 import sessionRouter from './routes/session';
@@ -18,7 +19,7 @@ app.use(logger('dev'));
 app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(cookieParser(COOKIE_SECRET));
 // multer middleware is required to support 'multipart/form-data'
 // which is used by any fetch request made with a 'FormData' body
 app.use(multer().none());
