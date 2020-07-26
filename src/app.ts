@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import multer from 'multer';
 import cors from 'cors';
 import logger from 'morgan';
@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 
 import { Error } from './types';
 import usersRouter from './routes/users';
+import sessionRouter from './routes/session';
 
 dotenv.config();
 const app = express();
@@ -28,6 +29,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/session', sessionRouter);
 
 
 // Catch 404 and forward to error handler

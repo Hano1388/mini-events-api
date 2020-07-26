@@ -4,6 +4,7 @@ import knex from '../db/client';
 import { UserId } from './types';
 import { geocoder } from '../utils/geocoder';
 import { Error } from '../types';
+import { generateError } from '../utils/generateError/index';
 
 export = {
     create: async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
@@ -39,8 +40,7 @@ export = {
                 next(new Error(error));
             }
         }
-        const error: Error = new Error('Email in use');
-        error.status = 400;
-        next(error);
+        
+        next(generateError('Email in use', 400));
     },
 }
