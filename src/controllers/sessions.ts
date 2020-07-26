@@ -4,7 +4,7 @@ import knex from '../db/client';
 import { generateError } from '../utils/generateError/index';
 
 export = {
-    create: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    createSession: async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         const user = req.body;
         // Do the validations here
         // get user by email
@@ -22,7 +22,8 @@ export = {
                     secure: isSecure,
                     signed: true
                 });
-                res.json({
+
+                return res.json({
                     message: "Successfully Sign In!"
                 });
             } else {
@@ -34,8 +35,9 @@ export = {
             next(generateError('Incorrect Email', 400));
         }
     },
-    destroy: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+
+    destroySession: async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
         res.clearCookie('user_id');
-        res.json({ message: 'Signed Out' });
+        return res.json({ message: 'Signed Out' });
     }
 }

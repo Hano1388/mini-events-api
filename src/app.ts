@@ -10,6 +10,7 @@ import { COOKIE_SECRET } from '../APP_KEYS';
 import { Error } from './types';
 import usersRouter from './routes/users';
 import sessionRouter from './routes/session';
+import eventsRouter from './routes/events';
 
 dotenv.config();
 const app = express();
@@ -40,6 +41,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/session', sessionRouter);
+app.use('/api/v1/events', eventsRouter);
 
 
 // Catch 404 and forward to I handler
