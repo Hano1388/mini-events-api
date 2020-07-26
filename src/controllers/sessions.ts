@@ -34,4 +34,8 @@ export = {
             next(generateError('Incorrect Email', 400));
         }
     },
+    destroy: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        res.clearCookie('user_id');
+        res.json({ message: 'Signed Out' });
+    }
 }

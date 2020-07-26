@@ -1,9 +1,10 @@
 import express, { Request, Response, NextFunction } from 'express';
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 import multer from 'multer';
 import cors from 'cors';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
+import methodOverride from 'method-override';
 
 import { COOKIE_SECRET } from '../APP_KEYS';
 import { Error } from './types';
@@ -23,6 +24,14 @@ app.use(cookieParser(COOKIE_SECRET));
 // multer middleware is required to support 'multipart/form-data'
 // which is used by any fetch request made with a 'FormData' body
 app.use(multer().none());
+app.use(
+    methodOverride((req: Request, res: Response) => {
+        if (req.body && req.body._method) {
+            const method = req.body._method;
+            return method;
+        }
+    })
+);
 
 // R O U T E S
 app.get('/', (req: Request, res: Response) => {
