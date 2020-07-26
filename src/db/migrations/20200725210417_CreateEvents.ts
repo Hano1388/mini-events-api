@@ -10,7 +10,7 @@ export async function up(knex: Knex): Promise<void> {
         t.string('address');
         t.float('latitude');
         t.float('longitude');
-        t.bigInteger('user_id').references('users.id');
+        t.bigInteger('user_id').notNullable().references('users.id').onDelete('cascade');
         t.timestamps(true, true);
     })
 }
