@@ -6,6 +6,7 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 
 import { Error } from './types';
+import usersRouter from './routes/users';
 
 dotenv.config();
 const app = express();
@@ -25,6 +26,8 @@ app.use(multer().none());
 app.get('/', (req: Request, res: Response) => {
     res.send('Hi There! 🙌 Welcome to My API');
 });
+
+app.use('/api/v1/users', usersRouter);
 
 
 // Catch 404 and forward to error handler
