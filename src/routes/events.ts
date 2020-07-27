@@ -1,13 +1,16 @@
 import express from 'express';
-import EventsController from '../controllers/events';
 
+import EventsController from '../controllers/events';
+import { authenticateUser } from '../middleware/authenticateUser';
+import { validateEvent } from '../middleware/validateEvent';
+import { authorizeUser } from '../middleware/aurhorizeUser';
 
 const router = express.Router();
 
-router.post('/', EventsController.createEvent)
+router.post('/', authenticateUser, validateEvent, EventsController.createEvent)
     .get('/', EventsController.getAllEvents)
     .get('/:id', EventsController.getOneEvent)
-    .patch('/:id', EventsController.updateEvent)
-    .delete('/:id', EventsController.deleteEvent)
+    .patch('/:id', authenticateUser, authorizeUser, EventsController.updateEvent)
+    .delete('/:id', authenticateUser, authorizeUser, EventsController.deleteEvent)
 
 export = router;

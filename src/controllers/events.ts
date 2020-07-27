@@ -8,13 +8,11 @@ export = {
     // TODO: Add user_signed_in? check, authorization, and validation middlewares
     // POST: /events
     createEvent: async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
-        const event = req.body;
-        // Do the validations here
-        const { title, description, date, address: addressString } = event;
-        // for now just doing this check until we have user_signed_in? middleware
-        let user_id;
-        if (req.signedCookies['user_id']) {
-            user_id = req.signedCookies['user_id'];
+        try {
+            const event = req.body;
+            const { title, description, date, address: addressString } = event;
+            const user_id = req.signedCookies['user_id'];
+
             let newEvent;
             if (addressString) {
                 const addressFields = await geocoder.geocode(addressString);
@@ -40,8 +38,8 @@ export = {
             const eventId = await knex('events').insert(newEvent, 'id');
 
             return res.json(eventId[0]);
-        } else {
-            next(generateError('You must Sign in to create an event', 401));
+        } catch (error) {
+            next(error);
         }
     },
 
@@ -75,7 +73,7 @@ export = {
             const event = req.body;
             const { title, description, date, address: addressString } = event;
             let updatedEvent;
-    
+
             if (addressString) {
                 const addressFields = await geocoder.geocode(addressString);
                 const { formattedAddress: address, latitude, longitude } = addressFields[0];
