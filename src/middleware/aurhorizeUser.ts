@@ -7,8 +7,6 @@ export const authorizeUser = async (req: Request, res: Response, next: NextFunct
     const { id } = req.params;
     const event = await knex('events').where('id', id).first();
     const user = await knex('users').where('id', req.signedCookies['user_id']).first();
-    console.log('event: ', event);
-    console.log('user: ', user);
     if (event && parseInt(event.user_id) === user.id || user.is_admin) {
         next();
     } else {
