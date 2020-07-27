@@ -114,6 +114,7 @@ typings/
 
 # APP_KEYS
 APP_KEYS.ts
+dist/APP_KEYS.js
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
