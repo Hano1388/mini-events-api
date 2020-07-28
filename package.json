@@ -9,9 +9,6 @@
     "watch-ts": "tsc -w",
     "watch-node": "nodemon dist/src/server.js",
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript, Node\" -c \"yello.bold, cyan.bold\" \"yarn run watch-ts\" \"yarn run watch-node\"",
-    "lint": "eslint '**/*.(ts|js)",
-    "lint:fix": "eslint --fix '**/*.+(ts|js)'",
-    "precommit": "lint-staged",
     "db:create": "ts-node src/db/createOrDropDb.ts",
     "db:drop": "ts-node src/db/createOrDropDb.ts",
     "db:generate:migration": "knex migrate:make --knexfile knexfile.ts -x ts $npm_config_name",
@@ -59,22 +56,11 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn precommit"
-    }
-  },
-  "lint-staged": {
-    "*.(js|ts)": [
-      "yarn lint:fix"
-    ]
   },
   "engines": {
     "node": "10.16.3"
