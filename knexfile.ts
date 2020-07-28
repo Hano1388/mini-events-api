@@ -6,11 +6,10 @@ const sharedConfig = {
         max: 10
     },
     migrations: {
-        tableName: 'knex_migrations',
-        directory: 'src/db/migrations'
+        directory: '/src/db/migrations'
     },
     seeds: {
-        directory: './src/db/seeds'
+        directory: '/src/db/seeds'
     }
 };
 
@@ -28,6 +27,6 @@ export = {
         }
     },
     production: {
-        database: 'mini_events_prod'
+        connection: process.env.DATABASE_URL
     }
 };

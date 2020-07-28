@@ -4,6 +4,8 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
+    "start": "node ./dist/src/server.js",
+    "build": "tsc",
     "watch-ts": "tsc -w",
     "watch-node": "nodemon dist/src/server.js",
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript, Node\" -c \"yello.bold, cyan.bold\" \"yarn run watch-ts\" \"yarn run watch-node\"",
