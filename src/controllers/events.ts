@@ -45,23 +45,28 @@ export = {
 
     // GET /events
     getAllEvents: async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
-        const events = await knex('events').orderBy('created_at', 'DESC');
-        if (events) {
-            return res.json(events)
-        } else {
-            next(generateError('events not found', 404))
+        try {
+            const events = await knex('events').orderBy('created_at', 'DESC');
+            if (events) {
+                return res.json(events)
+            }
+
+        } catch (error) {
+            next(error);
         }
     },
 
     // GET /events/:id
     getOneEvent: async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
-        const { id } = req.params;
+        try {
+            const { id } = req.params;
+            const event = await knex('events').where('id', id).first();
+            if (event) {
+                return res.json(event);
+            }
 
-        const event = await knex('events').where('id', id).first();
-        if (event) {
-            return res.json(event);
-        } else {
-            next(generateError('event not found', 404))
+        } catch (error) {
+            next(error);
         }
     },
 
