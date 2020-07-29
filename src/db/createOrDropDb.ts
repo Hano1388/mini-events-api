@@ -4,7 +4,7 @@ const { log } = console;
 
 const environment: string = process.env.NODE_ENV || 'development';
 // Load knex config for environment
-const knexConfig = require('../../knexfile.ts')[environment]
+const knexConfig = require('../../knexfile')[environment]
 
 const isPgInstalled = (): boolean => /PostgreSQL/.test(execSync('psql --version').toString());
 
