@@ -54,4 +54,15 @@ export = {
 
         next(generateError('Email in use', 400));
     },
+
+    currentUser: async (req: Request, res: Response, next: NextFunction): Promise<Response> => {
+        try {
+            const user = await knex('users').where('id', req.signedCookies['user_id']).first();
+            const { id, first_name, last_name, email, address, latitude, longitude, is_admin } = user;
+            const response = { id, first_name, last_name, email, address, latitude, longitude, is_admin }
+            return res.json(response);
+        } catch (error) {
+            next(new Error(error));
+        }
+    }
 }
